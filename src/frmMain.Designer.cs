@@ -55,14 +55,14 @@
             // 
             // progBarSample
             // 
-            this.progBarSample.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.progBarSample.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.progBarSample.BackColor = System.Drawing.Color.Black;
             this.progBarSample.Cursor = System.Windows.Forms.Cursors.Default;
             this.progBarSample.Location = new System.Drawing.Point(12, 50);
-            this.progBarSample.MarqueeAnimationSpeed = 1000;
+            this.progBarSample.MarqueeAnimationSpeed = 0;
             this.progBarSample.Name = "progBarSample";
-            this.progBarSample.Size = new System.Drawing.Size(156, 10);
+            this.progBarSample.Size = new System.Drawing.Size(137, 10);
             this.progBarSample.TabIndex = 2;
             this.progBarSample.Value = 70;
             this.progBarSample.Visible = false;
@@ -123,7 +123,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(180, 262);
+            this.ClientSize = new System.Drawing.Size(161, 262);
             this.ContextMenuStrip = this.ctMenu;
             this.ControlBox = false;
             this.Controls.Add(this.picDrive);
@@ -131,9 +131,9 @@
             this.Controls.Add(this.lbPercentSample);
             this.Controls.Add(this.lbDriveInfoSample);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "frmMain";
             this.ShowInTaskbar = false;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.frmMain_Paint);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.frmMain_MouseMove);
             ((System.ComponentModel.ISupportInitialize)(this.picDrive)).EndInit();

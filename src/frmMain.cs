@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using Microsoft.Win32;
+using System.Configuration;
+using DriveFrame.Properties;
 
 namespace DriveFrame
 {
@@ -52,6 +55,10 @@ namespace DriveFrame
             RegistryKey regKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
             mnAutorun.Checked = regKey.GetValue(Application.ProductName) != null;
             regKey.Close();
+
+            this.Left = (int)Settings.Default["left"];
+            this.Top = (int)Settings.Default["top"];
+
         }
         private void frmMain_MouseMove(object sender, MouseEventArgs e)
         {
@@ -82,7 +89,7 @@ namespace DriveFrame
         private void timerRefresh_Tick(object sender, EventArgs e)
         {
             listDrive.Clear();
-            listDrive.AddRange(DriveInfo.GetDrives());
+            listDrive.AddRange(DriveInfo.GetDrives().Where(d => d.IsReady));
 
             int i = 0;
             for (; i < listDrive.Count; ++i)
@@ -131,7 +138,14 @@ namespace DriveFrame
             if (size < ONE_GB)
                 return string.Format("{0} MB", size / ONE_MB);
 
-            return string.Format("{0} GB", size / ONE_GB);
+            return string.Format("{0:0.##} GB", 1f * size / ONE_GB);
+        }
+
+        private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Settings.Default["left"] = this.Left;
+            Settings.Default["top"] = this.Top;
+            Settings.Default.Save();
         }
     }
 }
