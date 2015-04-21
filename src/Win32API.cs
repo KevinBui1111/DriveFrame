@@ -229,7 +229,7 @@ using System.Runtime.InteropServices;
                         DeleteObject(bitmap);
                         DeleteObject(hFont);
 
-                        ReleaseDC(Memdc, new IntPtr(-1));
+                        ReleaseDC(Memdc, destdc);
                         DeleteDC(Memdc);
                     }
                 }
