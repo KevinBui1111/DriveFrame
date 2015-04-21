@@ -13,9 +13,8 @@ namespace DriveFrame
     public partial class frmMain : Form
     {
         PictureBox[] picDrives;
-        ProgressBar[] percentBar;
+        KProgressBar[] percentBar;
         List<DriveInfo> listDrive = new List<DriveInfo>();
-        bool refresh;
 
         public frmMain()
         {
@@ -31,7 +30,7 @@ namespace DriveFrame
             // generate control.
             int maxdrive = 10;
             picDrives = new PictureBox[maxdrive];
-            percentBar = new ProgressBar[maxdrive];
+            percentBar = new KProgressBar[maxdrive];
 
             for (int i = 0; i < maxdrive; ++i)
             {
@@ -42,7 +41,7 @@ namespace DriveFrame
                 picDrives[i].Visible = false;
                 this.Controls.Add(picDrives[i]);
 
-                percentBar[i] = new ProgressBar();
+                percentBar[i] = new KProgressBar();
                 percentBar[i].Height = progBarSample.Height;
                 percentBar[i].Width = progBarSample.Width;
                 percentBar[i].Location = new Point(picDrive.Left, picDrives[i].Bottom + 5);
@@ -58,7 +57,6 @@ namespace DriveFrame
 
             this.Left = (int)Settings.Default["left"];
             this.Top = (int)Settings.Default["top"];
-
         }
         private void frmMain_MouseMove(object sender, MouseEventArgs e)
         {
@@ -68,24 +66,6 @@ namespace DriveFrame
                 Win32API.SendMessage(this.Handle, Win32API.WM_NCLBUTTONDOWN, Win32API.HT_CAPTION, 0);
             }
         }
-        private void frmMain_Paint(object sender, PaintEventArgs e)
-        {
-            if (!refresh) return;
-            refresh = false;
-
-            for (int i = 0; i < listDrive.Count; ++i)
-            {
-                lbDriveInfoSample.Text = string.Format("({0}) {1}", listDrive[i].Name.Substring(0, 2), listDrive[i].VolumeLabel);
-                lbDriveInfoSample.Top = picDrives[i].Top;
-                percentBar[i].Value = 100 - (int)(listDrive[i].AvailableFreeSpace * 100 / listDrive[i].TotalSize);
-                Win32API.DrawTextOnGlass(this.Handle, lbDriveInfoSample.Text, lbDriveInfoSample.Font, lbDriveInfoSample.Bounds, 10);
-
-                lbPercentSample.Text = string.Format("{0} / {1}", ToReadableSize(listDrive[i].AvailableFreeSpace), ToReadableSize(listDrive[i].TotalSize));
-                lbPercentSample.Top = picDrives[i].Bottom - lbPercentSample.Height;
-                Win32API.DrawTextOnGlass(this.Handle, lbPercentSample.Text, lbPercentSample.Font, lbPercentSample.Bounds, 10);
-            }
-        }
-
         private void timerRefresh_Tick(object sender, EventArgs e)
         {
             listDrive.Clear();
@@ -96,11 +76,19 @@ namespace DriveFrame
             {
                 picDrives[i].Visible = true;
                 percentBar[i].Visible = true;
-            }
-            this.ClientSize = new Size(this.ClientSize.Width, percentBar[i - 1].Bottom + 10); ;
-            refresh = true;
-        }
+            
+                lbDriveInfoSample.Text = string.Format("({0}) {1}", listDrive[i].Name.Substring(0, 2), listDrive[i].VolumeLabel);
+                lbDriveInfoSample.Top = picDrives[i].Top;
+                percentBar[i].Value = 100 - (int)(listDrive[i].AvailableFreeSpace * 100 / listDrive[i].TotalSize);
+                Win32API.DrawTextOnGlass(this.Handle, lbDriveInfoSample.Text, lbDriveInfoSample.Font, lbDriveInfoSample.Bounds, 10);
 
+                lbPercentSample.Text = string.Format("{0} / {1}", ToReadableSize(listDrive[i].AvailableFreeSpace), ToReadableSize(listDrive[i].TotalSize));
+                lbPercentSample.Top = picDrives[i].Bottom - lbPercentSample.Height;
+                Win32API.DrawTextOnGlass(this.Handle, lbPercentSample.Text, lbPercentSample.Font, lbPercentSample.Bounds, 10);
+            }
+
+            this.ClientSize = new Size(this.ClientSize.Width, percentBar[i - 1].Bottom + 10);
+        }
         private void mnExit_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -122,6 +110,12 @@ namespace DriveFrame
 
             regKey.Close();
         }
+        private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Settings.Default["left"] = this.Left;
+            Settings.Default["top"] = this.Top;
+            Settings.Default.Save();
+        }
 
         string ToReadableSize(long size)
         {
@@ -139,13 +133,6 @@ namespace DriveFrame
                 return string.Format("{0} MB", size / ONE_MB);
 
             return string.Format("{0:0.##} GB", 1f * size / ONE_GB);
-        }
-
-        private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Settings.Default["left"] = this.Left;
-            Settings.Default["top"] = this.Top;
-            Settings.Default.Save();
         }
     }
 }
