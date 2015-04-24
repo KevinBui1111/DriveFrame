@@ -22,7 +22,6 @@ namespace DriveFrame
             Graphics g = e.Graphics;
             g.Clear(Color.WhiteSmoke);
             g.FillRectangle(Brushes.DeepSkyBlue, 0, 0, this.Width * Value / 100, this.Height);
-            g.DrawRectangle(Pens.LightGray, 0, 0, this.Width - 1, this.Height - 1);
         }
 
         int _value;
