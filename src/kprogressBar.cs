@@ -20,7 +20,8 @@ namespace DriveFrame
         {
             //base.OnPaint(e);
             Graphics g = e.Graphics;
-            g.Clear(Color.WhiteSmoke);
+            g.Clear(Color.FromArgb(120, Color.White));
+            //g.DrawRectangle(new Pen(Color.FromArgb(128, Color.DeepSkyBlue)), 0, 0, this.Width - 1, this.Height - 1);
             g.FillRectangle(Brushes.DeepSkyBlue, 0, 0, this.Width * Value / 100, this.Height);
         }
 
