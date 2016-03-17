@@ -36,6 +36,7 @@
             this.ctMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnAutorun = new System.Windows.Forms.ToolStripMenuItem();
             this.mnExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.lbSampleDisk = new System.Windows.Forms.Label();
             this.progBarSample = new DriveFrame.KProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.picDrive)).BeginInit();
             this.ctMenu.SuspendLayout();
@@ -46,7 +47,7 @@
             this.lbDriveInfoSample.AutoSize = true;
             this.lbDriveInfoSample.BackColor = System.Drawing.Color.Transparent;
             this.lbDriveInfoSample.ForeColor = System.Drawing.Color.White;
-            this.lbDriveInfoSample.Location = new System.Drawing.Point(38, 0);
+            this.lbDriveInfoSample.Location = new System.Drawing.Point(48, 30);
             this.lbDriveInfoSample.Name = "lbDriveInfoSample";
             this.lbDriveInfoSample.Size = new System.Drawing.Size(78, 15);
             this.lbDriveInfoSample.TabIndex = 1;
@@ -57,7 +58,7 @@
             // 
             this.picDrive.BackColor = System.Drawing.Color.Transparent;
             this.picDrive.Image = global::DriveFrame.Properties.Resources.drive_fix;
-            this.picDrive.Location = new System.Drawing.Point(0, 0);
+            this.picDrive.Location = new System.Drawing.Point(10, 30);
             this.picDrive.Name = "picDrive";
             this.picDrive.Size = new System.Drawing.Size(32, 32);
             this.picDrive.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -76,7 +77,7 @@
             this.lbPercentSample.AutoSize = true;
             this.lbPercentSample.BackColor = System.Drawing.Color.Transparent;
             this.lbPercentSample.ForeColor = System.Drawing.Color.White;
-            this.lbPercentSample.Location = new System.Drawing.Point(38, 17);
+            this.lbPercentSample.Location = new System.Drawing.Point(48, 47);
             this.lbPercentSample.Name = "lbPercentSample";
             this.lbPercentSample.Size = new System.Drawing.Size(90, 15);
             this.lbPercentSample.TabIndex = 1;
@@ -105,13 +106,25 @@
             this.mnExit.Text = "Exit";
             this.mnExit.Click += new System.EventHandler(this.mnExit_Click);
             // 
+            // lbSampleDisk
+            // 
+            this.lbSampleDisk.AutoSize = true;
+            this.lbSampleDisk.BackColor = System.Drawing.Color.Transparent;
+            this.lbSampleDisk.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbSampleDisk.ForeColor = System.Drawing.Color.White;
+            this.lbSampleDisk.Location = new System.Drawing.Point(10, 5);
+            this.lbSampleDisk.Name = "lbSampleDisk";
+            this.lbSampleDisk.Size = new System.Drawing.Size(129, 13);
+            this.lbSampleDisk.TabIndex = 1;
+            this.lbSampleDisk.Text = "ST500DM002-1BD142";
+            this.lbSampleDisk.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lbSampleDisk.Visible = false;
+            // 
             // progBarSample
             // 
-            this.progBarSample.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.progBarSample.Location = new System.Drawing.Point(0, 35);
+            this.progBarSample.Location = new System.Drawing.Point(10, 65);
             this.progBarSample.Name = "progBarSample";
-            this.progBarSample.Size = new System.Drawing.Size(161, 10);
+            this.progBarSample.Size = new System.Drawing.Size(177, 10);
             this.progBarSample.TabIndex = 4;
             this.progBarSample.Value = 0;
             this.progBarSample.Visible = false;
@@ -120,17 +133,21 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(161, 262);
+            this.ClientSize = new System.Drawing.Size(197, 262);
             this.ContextMenuStrip = this.ctMenu;
-            this.ControlBox = false;
             this.Controls.Add(this.picDrive);
             this.Controls.Add(this.lbPercentSample);
+            this.Controls.Add(this.lbSampleDisk);
             this.Controls.Add(this.lbDriveInfoSample);
             this.Controls.Add(this.progBarSample);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmMain";
+            this.Opacity = 0.8D;
+            this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.frmMain_MouseMove);
             ((System.ComponentModel.ISupportInitialize)(this.picDrive)).EndInit();
@@ -150,5 +167,6 @@
         private System.Windows.Forms.ToolStripMenuItem mnExit;
         private System.Windows.Forms.ToolStripMenuItem mnAutorun;
         private KProgressBar progBarSample;
+        private System.Windows.Forms.Label lbSampleDisk;
     }
 }
