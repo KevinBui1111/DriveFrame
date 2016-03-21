@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("KevinBuiCom")]
 [assembly: AssemblyProduct("DriveFrame")]
-[assembly: AssemblyCopyright("Copyright © KevinBui 2015")]
+[assembly: AssemblyCopyright("Copyright © KevinBui 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
