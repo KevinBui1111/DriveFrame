@@ -55,13 +55,15 @@ namespace DriveFrame
         }
         private void timerRefresh_Tick(object sender, EventArgs e)
         {
+            try {
+                listDrive = GetVolumns();
+            }
+            catch { return; }
+
             Size barsize = new Size(this.Width - picDrive.Left * 2, 10);
             photo = new Bitmap(this.Width, this.Height, PixelFormat.Format32bppArgb);
             Graphics g = Graphics.FromImage(photo);
             DrawBorder(g);
-
-            listDrive.Clear();
-            listDrive.AddRange(GetVolumns());
 
             string currentDisk = "";
             int currentTop = 0;
